@@ -1,13 +1,15 @@
-package com.example.demo.service.tester;
+package com.example.homework01.service.tester;
 
-import com.example.demo.controller.Message;
-import com.example.demo.service.csvParser.Parser;
+import com.example.homework01.controller.Message;
+import com.example.homework01.service.csvParser.Parser;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by Chershembeev_AE
@@ -15,16 +17,19 @@ import org.apache.log4j.Logger;
  * Time: 17:06.
  */
 
+@Service
 public class TestImpl implements Test {
     private static final Logger LOGGER = Logger.getLogger(TestImpl.class.getName());
 
     private Message message;
     private Parser parser;
 
+    @Autowired
     public TestImpl(Message message, Parser parser) {
         this.message = message;
         this.parser = parser;
     }
+
 
     @Override
     public void getTest() {

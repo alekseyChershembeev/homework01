@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.homework01.controller;
 
 import org.apache.log4j.Logger;
 
@@ -12,7 +12,8 @@ import org.apache.log4j.Logger;
 public class MessageImpl implements Message {
     private static final Logger LOGGER = Logger.getLogger(MessageImpl.class.getName());
 
-    @Override
+
+
     public String askQuestion(String question) {
 
         LOGGER.info("Return question: " + question);

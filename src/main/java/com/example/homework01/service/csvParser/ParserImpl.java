@@ -1,4 +1,4 @@
-package com.example.demo.service.csvParser;
+package com.example.homework01.service.csvParser;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -7,6 +7,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by Chershembeev_AE
@@ -14,8 +18,10 @@ import org.apache.log4j.Logger;
  * Time: 17:05.
  */
 
+
 public class ParserImpl implements Parser {
     private static final Logger LOGGER = Logger.getLogger(ParserImpl.class.getName());
+
 
     @Override
     public Map<String, String> getAllQuestions(String fileName) {

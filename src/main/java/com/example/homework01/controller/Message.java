@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.homework01.controller;
 
 /**
  * Created by Chershembeev_AE

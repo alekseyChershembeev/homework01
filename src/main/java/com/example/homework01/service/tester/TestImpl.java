@@ -2,13 +2,14 @@ package com.example.homework01.service.tester;
 
 import com.example.homework01.controller.Message;
 import com.example.homework01.service.csvParser.Parser;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -23,50 +24,73 @@ public class TestImpl implements Test {
 
     private Message message;
     private Parser parser;
+    private Locale locale;
+    private MessageSource messageSource;
+
+    @Value("${file.name.en}")
+    private String fileNameEn;
+    @Value("${file.name.ru}")
+    private String fileNameRu;
+    @Value("${language}")
+    private String language;
 
     @Autowired
-    public TestImpl(Message message, Parser parser) {
+    public TestImpl(Message message, Parser parser, MessageSource messageSource) {
         this.message = message;
         this.parser = parser;
+        this.messageSource = messageSource;
     }
 
 
     @Override
     public void getTest() {
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
-        String name = null;
-        String surName =null;
-
-        try {
-            System.out.println( message.askQuestion("What is your name?"));
-            name = reader.readLine();
-            System.out.println( message.askQuestion("What is your surName?"));
-            surName = reader.readLine();
-        } catch (IOException e) {
-            LOGGER.error(name + ""+ surName, e);
+        if (locale == null) {
+            defineLocale();
         }
+        String fileName = locale == Locale.ENGLISH ? fileNameEn : fileNameRu;
+        Map<String, String> questions = parser.getAllQuestions(fileName);
 
-        Map<String,String>questions = parser.getAllQuestions("C:\\Users\\Chershembeev_AE\\Downloads\\demo\\src\\main\\resources\\testing.csv");
+        String name;
+        String surName;
+
+        name = message.askQuestion(messageSource.getMessage("enter.first.name", new Object[]{}, locale));
+
+        surName = message.askQuestion(messageSource.getMessage("enter.second.name", new Object[]{}, locale));
+
 
         AtomicInteger count = new AtomicInteger();
-        questions.forEach((k,v)->{
-            System.out.println(message.askQuestion(k));
-            String answer = "";
-            try {
-                answer = reader.readLine();
-            } catch (IOException e) {
-                LOGGER.warn(answer + " "+ e.getMessage());
-            }
+        questions.forEach((k, v) -> {
+
+            String answer =message.askQuestion(k);
+
             if (answer.equals(v))
                 count.getAndIncrement();
         });
 
-        System.out.println(name + " "+ surName);
-        System.out.println("Right answers: "+ count+"/"+5);
+        System.out.println(name + " " + surName);
+        message.askQuestion(messageSource.getMessage("correct.answers", new Object[]{count}, locale));
 
 
+    }
 
+    @Override
+    public void setLocale(Locale locale) {
+        this.locale = locale;
+    }
+
+    private void defineLocale() {
+        if (language == null || language.isEmpty()) {
+            locale = LocaleContextHolder.getLocale();
+        } else if (language.equals("en")) {
+            locale = Locale.ENGLISH;
+        } else {
+            locale = new Locale("ru");
+        }
+    }
+
+    @Override
+    public void close() {
+        message.close();
     }
 }

@@ -7,6 +7,6 @@ package com.example.homework01.controller;
  */
 
 public interface Message {
-
+    void close();
     String askQuestion(String question);
 }

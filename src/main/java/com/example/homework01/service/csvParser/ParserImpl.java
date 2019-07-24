@@ -2,15 +2,11 @@ package com.example.homework01.service.csvParser;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Service;
 
 /**
  * Created by Chershembeev_AE
@@ -27,7 +23,7 @@ public class ParserImpl implements Parser {
     public Map<String, String> getAllQuestions(String fileName) {
 
         Map<String, String> questions = new HashMap<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+        try (BufferedReader reader = new BufferedReader( new InputStreamReader(getClass().getResourceAsStream("/" + fileName)))) {
 
             while (reader.ready()) {
                 String line;

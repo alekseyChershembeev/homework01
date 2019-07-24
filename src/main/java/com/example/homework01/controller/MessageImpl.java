@@ -1,5 +1,8 @@
 package com.example.homework01.controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import org.apache.log4j.Logger;
 
 
@@ -14,11 +17,34 @@ public class MessageImpl implements Message {
 
 
 
+    private BufferedReader reader;
+
+    @Override
     public String askQuestion(String question) {
+        if (reader == null) {
+            reader = new BufferedReader(new InputStreamReader(System.in));
+            LOGGER.info("Reader initiated");
+        }
 
-        LOGGER.info("Return question: " + question);
-
-        return question;
+        String answer = "";
+        try {
+            System.out.println(question);
+            answer = reader.readLine();
+        } catch (IOException e) {
+            LOGGER.error("Error while reading answer", e);
+        }
+        return answer;
     }
 
+    @Override
+    public void close() {
+        if (reader != null) {
+            try {
+                reader.close();
+            } catch (IOException e) {
+                LOGGER.error("Reader was not closed properly", e);
+            }
+            LOGGER.info("Reader closed");
+        }
+    }
 }

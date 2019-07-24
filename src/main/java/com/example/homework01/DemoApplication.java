@@ -10,7 +10,9 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
+@PropertySource("classpath:application.properties")
 @Configuration
 @ComponentScan
 public class DemoApplication {
@@ -21,10 +23,9 @@ public class DemoApplication {
 
         Test test =  context.getBean(TestImpl.class);
         test.getTest();
+        test.close();
 
-//        ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
-//        Test test = (Test) context.getBean("tester");
-//        test.getTest();
+
     }
 
     @Bean

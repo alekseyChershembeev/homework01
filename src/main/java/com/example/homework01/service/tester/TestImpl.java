@@ -5,6 +5,7 @@ import com.example.homework01.service.csvParser.Parser;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+import javax.annotation.PostConstruct;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,14 +19,16 @@ import org.springframework.stereotype.Service;
  * Time: 17:06.
  */
 
+
+
 @Service
 public class TestImpl implements Test {
     private static final Logger LOGGER = Logger.getLogger(TestImpl.class.getName());
 
-    private Message message;
-    private Parser parser;
+    private final Message message;
+    private final Parser parser;
     private Locale locale;
-    private MessageSource messageSource;
+    private final MessageSource messageSource;
 
     @Value("${file.name.en}")
     private String fileNameEn;
@@ -41,7 +44,10 @@ public class TestImpl implements Test {
         this.messageSource = messageSource;
     }
 
-
+    @PostConstruct
+    private void startApp(){
+        getTest();
+    }
     @Override
     public void getTest() {
 
@@ -70,6 +76,7 @@ public class TestImpl implements Test {
 
         System.out.println(name + " " + surName);
         message.askQuestion(messageSource.getMessage("correct.answers", new Object[]{count}, locale));
+
 
 
     }

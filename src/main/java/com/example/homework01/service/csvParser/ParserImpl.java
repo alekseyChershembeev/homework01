@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by Chershembeev_AE
@@ -14,7 +15,7 @@ import org.apache.log4j.Logger;
  * Time: 17:05.
  */
 
-
+@Service
 public class ParserImpl implements Parser {
     private static final Logger LOGGER = Logger.getLogger(ParserImpl.class.getName());
 

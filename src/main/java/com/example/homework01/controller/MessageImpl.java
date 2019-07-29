@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 
 
 /**
@@ -11,7 +12,7 @@ import org.apache.log4j.Logger;
  * Date: 09.07.2019
  * Time: 17:08.
  */
-
+@Component
 public class MessageImpl implements Message {
     private static final Logger LOGGER = Logger.getLogger(MessageImpl.class.getName());
 

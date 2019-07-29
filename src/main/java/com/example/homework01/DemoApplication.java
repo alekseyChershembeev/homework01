@@ -1,43 +1,15 @@
 package com.example.homework01;
 
-import com.example.homework01.controller.Message;
-import com.example.homework01.controller.MessageImpl;
-import com.example.homework01.service.csvParser.Parser;
-import com.example.homework01.service.csvParser.ParserImpl;
-import com.example.homework01.service.tester.Test;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.context.annotation.PropertySource;
 
+@SpringBootApplication
 @EnableAspectJAutoProxy
-@PropertySource("classpath:application.properties")
-@Configuration
-@ComponentScan
 public class DemoApplication {
 
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext context =
-                new AnnotationConfigApplicationContext(DemoApplication.class);
-
-        Test test =  context.getBean(Test.class);
-        test.getTest();
-        test.close();
-
-
+        SpringApplication.run(DemoApplication.class, args);
     }
-
-    @Bean
-    Message messenger(){
-        return new MessageImpl();
-    }
-    @Bean
-    Parser parser(){
-        return new ParserImpl();
-    }
-
-
 
 }

@@ -1,0 +1,19 @@
+{
+  "properties": [
+    {
+      "name": "language",
+      "type": "java.lang.String",
+      "description": "Description for language."
+    },
+
+    {
+      "name": "file.name.en",
+      "type": "java.lang.String",
+      "description": "Description for file.name.en."
+    },
+    {
+      "name": "file.name.ru",
+      "type": "java.lang.String",
+      "description": "Description for file.name.ru."
+    }
+  ] }

@@ -62,12 +62,6 @@
         <!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
         <dependency>
             <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-            <version>1.9.5</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
         </dependency>
         <dependency>
@@ -82,8 +76,11 @@
             <version>17.0.0</version>
             <scope>test</scope>
         </dependency>
-
-
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.8.6</version>
+        </dependency>
     </dependencies>
 
     <build>

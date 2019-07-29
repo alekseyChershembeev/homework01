@@ -5,13 +5,14 @@ import com.example.homework01.controller.MessageImpl;
 import com.example.homework01.service.csvParser.Parser;
 import com.example.homework01.service.csvParser.ParserImpl;
 import com.example.homework01.service.tester.Test;
-import com.example.homework01.service.tester.TestImpl;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.PropertySource;
 
+@EnableAspectJAutoProxy
 @PropertySource("classpath:application.properties")
 @Configuration
 @ComponentScan
@@ -21,7 +22,7 @@ public class DemoApplication {
         AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext(DemoApplication.class);
 
-        Test test =  context.getBean(TestImpl.class);
+        Test test =  context.getBean(Test.class);
         test.getTest();
         test.close();
 

@@ -62,10 +62,10 @@ public class TestImpl implements Test {
         this.messageSource = messageSource;
     }
 
-    @PostConstruct
-    private void startApp(){
-        getTest();
-    }
+//    @PostConstruct
+//    private void startApp(){
+//        getTest();
+//    }
     @Override
     public void getTest() {
 

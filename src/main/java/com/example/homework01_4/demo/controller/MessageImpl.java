@@ -39,6 +39,12 @@ public class MessageImpl implements Message {
     }
 
     @Override
+    public void message(String message) {
+        System.out.println(message);
+        LOGGER.info(message);
+    }
+
+    @Override
     public void close() {
         if (reader != null) {
             try {

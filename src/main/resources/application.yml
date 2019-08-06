@@ -1,0 +1,7 @@
+file:
+  name:
+    en: testing_en.csv
+    ru: testing_ru.csv
+
+language: en
+

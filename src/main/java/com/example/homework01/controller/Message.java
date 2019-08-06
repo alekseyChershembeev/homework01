@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.homework01.controller;
 
 /**
  * Created by Chershembeev_AE
@@ -7,6 +7,6 @@ package com.example.demo.controller;
  */
 
 public interface Message {
-
+    void close();
     String askQuestion(String question);
 }
